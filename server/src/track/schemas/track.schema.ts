@@ -1,8 +1,8 @@
-import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {HydratedDocument, Types} from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import {Document} from 'mongoose';
 import * as mongoose from 'mongoose'
 
-export type TrackDocument = HydratedDocument<Track>;
+export type TrackDocument = Track & Document;
 
 @Schema()
 export class Track {
@@ -13,7 +13,7 @@ export class Track {
     artist: string;
 
     @Prop()
-    track: string;
+    text: string;
 
     @Prop()
     listens: number;
@@ -26,7 +26,7 @@ export class Track {
 
     // Связываем с таблицей Comment
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]})
-    comments: Comment[]
+    comments: Comment[];
 }
 
 export const TrackSchema = SchemaFactory.createForClass(Track);

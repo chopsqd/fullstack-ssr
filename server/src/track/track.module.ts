@@ -3,7 +3,7 @@ import {TrackController} from "./track.controller";
 import {TrackService} from "./track.service";
 import {MongooseModule} from "@nestjs/mongoose";
 import {Track, TrackSchema} from "./schemas/track.schema";
-import {CommentSchema} from "./schemas/comment.schema";
+import {Comment, CommentSchema} from "./schemas/comment.schema";
 
 
 @Module({
