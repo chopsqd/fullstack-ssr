@@ -8,8 +8,8 @@ import TrackList from "../../components/TrackList";
 const Index = () => {
     const router = useRouter()
     const tracks: ITrack[] = [
-        {_id: '1', name: 'Трек 1', artist: 'Исполнитель 1', text: 'Text example', comments: [], listens: 5, audio: 'http://localhost:5000/audio/1671550986996.mp3', picture: 'http://localhost:5000/image/1671550987000.jpg'},
-        {_id: '2', name: 'Трек 2', artist: 'Исполнитель 2', text: 'Text example 2', comments: [], listens: 3, audio: 'http://localhost:5000/audio/1671550986996.mp3', picture: 'http://localhost:5000/image/1671550987000.jpg'},
+        {_id: '1', name: 'Трек 1', artist: 'Исполнитель 1', text: 'Text example', comments: [], listens: 5, audio: 'https://cdn.mp3xa.me/igVjAGEnQqX30AkW4AnCgQ/1671650303/L29ubGluZS9tcDMvMjAyMi8wMy9BbGVrcyBBdGFtYW4gJiBGaW5pay5GaW55YSAtINCU0LXQstC-0YfQutCwINCR0LDQvdC00LjRgtC60LAgKFNhc2hhIEZpcnN0IFJhZGlvIFJlbWl4KS5tcDM', picture: 'https://phonoteka.org/uploads/posts/2021-05/1621693392_8-phonoteka_org-p-fon-dlya-oblozhek-trekov-9.jpg'},
+        {_id: '2', name: 'Трек 2', artist: 'Исполнитель 2', text: 'Text example 2', comments: [], listens: 3, audio: 'https://cdn.mp3xa.me/igVjAGEnQqX30AkW4AnCgQ/1671650303/L29ubGluZS9tcDMvMjAyMi8wMy9BbGVrcyBBdGFtYW4gJiBGaW5pay5GaW55YSAtINCU0LXQstC-0YfQutCwINCR0LDQvdC00LjRgtC60LAgKFNhc2hhIEZpcnN0IFJhZGlvIFJlbWl4KS5tcDM', picture: 'https://phonoteka.org/uploads/posts/2021-05/1621693392_8-phonoteka_org-p-fon-dlya-oblozhek-trekov-9.jpg'},
     ]
 
     return (

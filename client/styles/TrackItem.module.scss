@@ -1,0 +1,15 @@
+.track {
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+
+  &__img {
+    transition: all .3s ease;
+
+    &:hover {
+      cursor: pointer;
+      margin-left: 3px;
+    }
+  }
+}
