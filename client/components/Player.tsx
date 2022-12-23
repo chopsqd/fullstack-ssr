@@ -1,29 +1,81 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Pause, PlayArrow, VolumeUp} from "@mui/icons-material";
 import {Grid, IconButton} from "@mui/material";
 import styles from '../styles/Player.module.scss'
 import {ITrack} from "../types/track";
 import ProgressBar from "./ProgressBar";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
+
+let audio: any;
 
 const Player: React.FC = () => {
-    const active = false
-    const track: ITrack = {_id: '2', name: 'Трек 2', artist: 'Исполнитель 2', text: 'Text example 2', comments: [], listens: 3, audio: 'https://cdn.mp3xa.me/igVjAGEnQqX30AkW4AnCgQ/1671650303/L29ubGluZS9tcDMvMjAyMi8wMy9BbGVrcyBBdGFtYW4gJiBGaW5pay5GaW55YSAtINCU0LXQstC-0YfQutCwINCR0LDQvdC00LjRgtC60LAgKFNhc2hhIEZpcnN0IFJhZGlvIFJlbWl4KS5tcDM', picture: 'https://phonoteka.org/uploads/posts/2021-05/1621693392_8-phonoteka_org-p-fon-dlya-oblozhek-trekov-9.jpg'}
+    const {active, pause, duration, currentTime, volume} = useTypedSelector(state => state.player)
+    const {pauseTrack, playTrack, setVolume, setCurrentTime, setDuration} = useActions()
+
+    useEffect(() => {
+        if(!audio) {
+            audio = new Audio()
+        } else {
+            audioInit()
+            play()
+        }
+    }, [active])
+
+    const audioInit = () => {
+        if(active) {
+            audio.src = active.audio
+            audio.volume = volume / 100
+            // callback, потому что сработает только после загрузки трека
+            audio.onloadedmetadata = () => {
+                setDuration(Math.ceil(audio.duration))
+            }
+            // callback, который срабатывает на каждое изменение времени
+            audio.ontimeupdate = () => {
+                setCurrentTime(Math.ceil(audio.currentTime))
+            }
+        }
+    }
+
+    const play = () => {
+        if(pause) {
+            playTrack()
+            audio.play()
+        } else {
+            pauseTrack()
+            audio.pause()
+        }
+    }
+
+    const changeVolume = (event: React.ChangeEvent<HTMLInputElement>) => {
+        audio.volume = Number(event.target.value) / 100
+        setVolume(Number(event.target.value))
+    }
+
+    const changeCurrentTime = (event: React.ChangeEvent<HTMLInputElement>) => {
+        audio.currentTime = Number(event.target.value)
+        setCurrentTime(Number(event.target.value))
+    }
+
+    if(!active) {
+        return null
+    }
 
     return (
         <div className={styles.player}>
-            <IconButton>
-                {active
-                    ? <Pause/>
-                    : <PlayArrow/>
+            <IconButton onClick={play}>
+                {pause
+                    ? <PlayArrow/>
+                    : <Pause/>
                 }
             </IconButton>
             <Grid container direction={"column"} style={{width: 200, margin: '0 20px'}}>
-                <div>{track.name}</div>
-                <div style={{fontSize: 12, color: 'gray'}}>{track.artist}</div>
+                <div>{active?.name}</div>
+                <div style={{fontSize: 12, color: 'gray'}}>{active?.artist}</div>
             </Grid>
-            <ProgressBar left={0} right={100} onChange={() => {}}/>
+            <ProgressBar left={currentTime} right={duration} onChange={changeCurrentTime}/>
             <VolumeUp style={{marginLeft: 'auto'}}/>
-            <ProgressBar left={0} right={100} onChange={() => {}}/>
+            <ProgressBar left={volume} right={100} onChange={changeVolume}/>
         </div>
     );
 };
