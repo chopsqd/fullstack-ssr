@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface TrackProgressProps {
+interface ProgressBarProps {
     left: number
     right: number
     onChange: (e: any) => void
 }
 
-const ProgressBar: React.FC<TrackProgressProps> = ({left, right, onChange}) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({left, right, onChange}) => {
     return (
         <div style={{display: 'flex'}}>
             <input
