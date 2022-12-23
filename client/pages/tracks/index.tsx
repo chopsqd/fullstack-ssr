@@ -4,7 +4,6 @@ import {Card, Button, Grid, Box} from "@mui/material";
 import {useRouter} from "next/router";
 import {ITrack} from "../../types/track";
 import TrackList from "../../components/TrackList";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const Index = () => {
     const router = useRouter()
