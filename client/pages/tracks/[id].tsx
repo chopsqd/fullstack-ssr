@@ -7,13 +7,13 @@ import axios from "axios";
 import {IComment, ITrack} from "../../types/track";
 import {useInput} from "../../hooks/useInput";
 
-const TrackPage = ({serverTrack}) => {
+const TrackPage = ({serverTrack}: any) => {
     const [track, setTrack] = useState<ITrack>(serverTrack)
     const router = useRouter()
     const username = useInput('')
     const text = useInput('')
-()
-    const addComment = () => {
+
+    const addComment = async () => {
         try {
             const response = await axios.post('http://localhost:5000/tracks/comment', {
                 username: username.value,
@@ -27,7 +27,10 @@ const TrackPage = ({serverTrack}) => {
     }
 
     return (
-        <MainLayout>
+        <MainLayout
+            title={`${track.name} | Музыкальная площадка`}
+            keywords={`${track.name}, ${track.artist}, ${track.text}`}
+        >
             <Button
                 variant={"outlined"}
                 style={{fontSize: 32}}

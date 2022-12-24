@@ -10,8 +10,8 @@ import axios from "axios";
 const Create = () => {
     const router = useRouter()
     const [activeStep, setActiveStep] = useState(0)
-    const [picture, setPicture] = useState(null)
-    const [audio, setAudio] = useState(null)
+    const [picture, setPicture] = useState(null as any)
+    const [audio, setAudio] = useState(null as any)
     const name = useInput('')
     const artist = useInput('')
     const text = useInput('')
