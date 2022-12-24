@@ -15,7 +15,8 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active = false}) => {
     const router = useRouter()
     const {playTrack, pauseTrack, setActive} = useActions()
 
-    const play = () => {
+    const play = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation()
         setActive(track)
         playTrack()
     }
@@ -28,7 +29,7 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active = false}) => {
                     : <PlayArrow/>
                 }
             </IconButton>
-            <img width={70} height={70} src={track.picture} alt={track.name} className={styles.track__img} onClick={() => router.push(`/tracks/${track._id}`)}/>
+            <img width={70} height={70} src={'http://localhost:5000/' + track.picture} alt={track.name} className={styles.track__img} onClick={() => router.push(`/tracks/${track._id}`)}/>
             <Grid container direction={"column"} style={{width: 200, margin: '0 20px'}}>
                 <div>{track.name}</div>
                 <div style={{fontSize: 12, color: 'gray'}}>{track.artist}</div>

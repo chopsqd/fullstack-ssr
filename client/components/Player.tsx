@@ -24,7 +24,7 @@ const Player: React.FC = () => {
 
     const audioInit = () => {
         if(active) {
-            audio.src = active.audio
+            audio.src = 'http://localhost:5000/' + active.audio
             audio.volume = volume / 100
             // callback, потому что сработает только после загрузки трека
             audio.onloadedmetadata = () => {
